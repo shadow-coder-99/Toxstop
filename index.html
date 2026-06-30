@@ -4,33 +4,276 @@ HTML
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToxStop Dashboard</title>
+    <title>Enterprise SaaS Dashboard</title>
     <style>
-        body { font-family: sans-serif; background-color: #121214; color: #ffffff; padding: 40px; }
-        .dashboard { max-width: 800px; margin: 0 auto; background: #1a1a1e; padding: 30px; border-radius: 12px; border: 1px solid #2a2a30; }
-        h1 { color: #00ff88; }
-        .status-box { background: #222227; padding: 15px; border-radius: 6px; margin: 20px 0; border-left: 4px solid #00ff88; }
-        .nav-links { display: flex; gap: 20px; margin-top: 30px; }
-        .btn { background: #00ff88; color: #000; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; text-decoration: none; font-weight: bold; }
-        .btn-secondary { background: #333; color: #fff; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            min-height: 100vh;
+        }
+        /* Sidebar Styling */
+        .sidebar {
+            width: 240px;
+            background-color: #161b22;
+            border-right: 1px solid #30363d;
+            padding: 24px;
+            display: flex; 
+            flex-direction: column;
+            gap: 32px;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: #58a6ff;
+            font-size: 1.2rem;
+        }
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            list-style: none;
+        }
+        .nav-item {
+            padding: 10px 12px;
+            border-radius: 6px;
+            color: #8b949e;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+        .nav-item.active, .nav-item:hover {
+            background-color: #21262d;
+            color: #f0f6fc;
+        }
+        /* Main Workspace Styling */
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+        .header-area {
+            margin-bottom: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-area h1 {
+            font-size: 1.6rem;
+            color: #f0f6fc;
+        }
+        /* Metrics Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        .stat-card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 24px;
+        }
+        .stat-label {
+            color: #8b949e;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #f0f6fc;
+            margin-bottom: 4px;
+        }
+        .stat-change {
+            font-size: 0.85rem;
+            color: #3fb950; /* Green */
+        }
+        /* Data Table Styling */
+        .table-container {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .table-title {
+            padding: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-bottom: 1px solid #30363d;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+        th {
+            background-color: #161b22;
+            color: #8b949e;
+            padding: 12px 20px;
+            font-weight: 600;
+            border-bottom: 1px solid #30363d;
+        }
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #21262d;
+            color: #c9d1d9;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .status-badge {
+            background-color: rgba(63, 185, 80, 0.15);
+            color: #3fb950;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        /* Responsive adjustments for phones */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                padding: 16px;
+                gap: 16px;
+            }
+            .nav-links {
+                flex-direction: row;
+                overflow-x: auto;
+            }
+            .main-content {
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="dashboard">
-        <h1>ToxStop Dashboard</h1>
-        
-        <div class="status-box">
-            🛡️ <strong>Status:</strong> ToxStop Live Protection is Active.
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="logo-area">
+            <span>🛡️</span> Toxstop
+        </div>
+        <ul class="nav-links">
+            <li><a class="nav-item active">Dashboard</a></li>
+            <li><a class="nav-item">Customers</a></li>
+            <li><a class="nav-item">Analytics</a></li>
+            <li><a class="nav-item">Settings</a></li>
+        </ul>
+    </div>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <div class="main-content">
+        <div class="header-area">
+            <div>
+                <h1>Cockpit Overview</h1>
+            </div>
         </div>
 
-        <p>Your system is currently guarded against toxic software effects and intrusive digital elements.</p>
+        <!-- STATS CARDS GRID -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Monthly Recurring Revenue</div>
+                <div class="stat-value">$14,250</div>
+                <div class="stat-change">▲ +12% this month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Active Active Businesses</div>
+                <div class="stat-value">84</div>
+                <div class="stat-change">▲ +8 new accounts</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">System Health Status</div>
+                <div class="stat-value">99.98%</div>
+                <div class="stat-change" style="color: #58a6ff;">All systems optimal</div>
+            </div>
+        </div>
 
-        <div class="nav-links">
-            <a href="index.html" class="btn">Dashboard Home</a>
-            <a href="settings.html" class="btn btn-secondary">Go to Shield Settings →</a>
+        <!-- CLIENTS DATA TABLE -->
+        <div class="table-container">
+            <div class="table-title">Recent Accounts Intercepted</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Company Name</th>
+                        <th>Plan Level</th>
+                        <th>Usage Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Acme Corporation</td>
+                        <td>Enterprise Tier</td>
+                        <td><span class="status-badge">Protected</span></td>
+                    </tr>
+                    <tr>
+                        <td>Stark Industries</td>
+                        <td>Growth Scale</td>
+                        <td><span class="status-badge">Protected</span></td>
+                    </tr>
+                    <tr>
+                        <td>Wayne Enterprises</td>
+                        <td>Enterprise Tier</td>
+                        <td><span class="status-badge">Protected</span></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
 </body>
-</html>
+</html><!-- TOXSTOP LIVE PROTECTION LOGS -->
+<div class="mt-8 bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden">
+    <div class="px-6 py-4 border-b border-gray-700 bg-gray-900">
+        <h3 class="text-lg font-semibold text-white">Live User Protection Logs</h3>
+        <p class="text-xs text-gray-400">Real-time tracking of intercepted software hazards</p>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm text-gray-300">
+            <thead class="bg-gray-700 text-xs uppercase text-gray-400 border-b border-gray-700">
+                <tr>
+                    <th class="px-6 py-3">Timestamp</th>
+                    <th class="px-6 py-3">Source App</th>
+                    <th class="px-6 py-3">Hazard Type</th>
+                    <th class="px-6 py-3">Action Taken</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-700">
+                <tr class="hover:bg-gray-700/50 transition">
+                    <td class="px-6 py-4 font-mono text-xs text-gray-400">12:11:05</td>
+                    <td class="px-6 py-4 font-medium text-white">Background Process X</td>
+                    <td class="px-6 py-4 text-red-400 font-medium">Data Overreach</td>
+                    <td class="px-6 py-4"><span class="px-2.5 py-1 text-xs rounded-full bg-red-900/40 text-red-300 border border-red-700">Blocked</span></td>
+                </tr>
+                <tr class="hover:bg-gray-700/50 transition">
+                    <td class="px-6 py-4 font-mono text-xs text-gray-400">12:08:42</td>
+                    <td class="px-6 py-4 font-medium text-white">AdTracker Engine</td>
+                    <td class="px-6 py-4 text-amber-400 font-medium">Unfair Dark Pattern</td>
+                    <td class="px-6 py-4"><span class="px-2.5 py-1 text-xs rounded-full bg-amber-900/40 text-amber-300 border border-amber-700">Isolated</span></td>
+                </tr>
+                <tr class="hover:bg-gray-700/50 transition">
+                    <td class="px-6 py-4 font-mono text-xs text-gray-400">11:55:19</td>
+                    <td class="px-6 py-4 font-medium text-white">Social Feed Aggregator</td>
+                    <td class="px-6 py-4 text-purple-400 font-medium">Addictive Loop Trigger</td>
+                    <td class="px-6 py-4"><span class="px-2.5 py-1 text-xs rounded-full bg-purple-900/40 text-purple-300 border border-purple-700">Neutralized</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
