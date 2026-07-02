@@ -15,7 +15,12 @@
             color: #c9d1d9;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             display: flex;
+            flex-direction: column;
             min-height: 100vh;
+        }
+        .wrapper {
+            display: flex;
+            flex: 1;
         }
         /* Sidebar Styling */
         .sidebar {
@@ -143,9 +148,8 @@
             font-size: 0.75rem;
             font-weight: 600;
         }
-        /* Responsive adjustments for phones */
         @media (max-width: 768px) {
-            body {
+            .wrapper {
                 flex-direction: column;
             }
             .sidebar {
@@ -165,81 +169,80 @@
 </head>
 <body>
 
-    <!-- SIDEBAR -->
-    <div class="sidebar">
-        <div class="logo-area">
-            <span>🛡️</span> Toxstop
-        </div>
-        <ul class="nav-links">
-            <li><a href="index.html" class="nav-item active">Dashboard</a></li>
-            <li><a href="#" class="nav-item">Customers</a></li>
-            <li><a href="analytics.html" class="nav-item">Analytics</a></li>
-            <li><a href="settings.html" class="nav-item">Settings</a></li>
-        </ul>
-    </div>
+    <a href="analytics.html" style="display: block; background: #58a6ff; color: #0d1117; text-align: center; padding: 15px; font-weight: bold; text-decoration: none; font-size: 1.2rem; width: 100%;">🔥 CLICK HERE FOR ANALYTICS PAGE 🔥</a>
 
-    <!-- MAIN DASHBOARD CONTENT -->
-    <div class="main-content">
-        <div class="header-area">
-            <div>
-                <h1>Cockpit Overview</h1>
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="logo-area">
+                <span>🛡️</span> Toxstop
             </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-item active">Dashboard</a></li>
+                <li><a href="#" class="nav-item">Customers</a></li>
+                <li><a href="analytics.html" class="nav-item">Analytics</a></li>
+                <li><a href="settings.html" class="nav-item">Settings</a></li>
+            </ul>
         </div>
 
-        <!-- STATS CARDS GRID -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-label">Monthly Recurring Revenue</div>
-                <div class="stat-value">$14,250</div>
-                <div class="stat-change">▲ +12% this month</div>
+        <div class="main-content">
+            <div class="header-area">
+                <div>
+                    <h1>Cockpit Overview</h1>
+                </div>
             </div>
-            <div class="stat-card">
-                <div class="stat-label">Active Active Businesses</div>
-                <div class="stat-value">84</div>
-                <div class="stat-change">▲ +8 new accounts</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">System Health Status</div>
-                <div class="stat-value">99.98%</div>
-                <div class="stat-change" style="color: #58a6ff;">All systems optimal</div>
-            </div>
-        </div>
 
-        <!-- CLIENTS DATA TABLE -->
-        <div class="table-container">
-            <div class="table-title">Recent Accounts Intercepted</div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Company Name</th>
-                        <th>Plan Level</th>
-                        <th>Usage Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Acme Corporation</td>
-                        <td>Enterprise Tier</td>
-                        <td><span class="status-badge">Protected</span></td>
-                    </tr>
-                    <tr>
-                        <td>Stark Industries</td>
-                        <td>Growth Scale</td>
-                        <td><span class="status-badge">Protected</span></td>
-                    </tr>
-                    <tr>
-                        <td>Wayne Enterprises</td>
-                        <td>Enterprise Tier</td>
-                        <td><span class="status-badge">Protected</span></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Monthly Recurring Revenue</div>
+                    <div class="stat-value">$14,250</div>
+                    <div class="stat-change">▲ +12% this month</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Active Active Businesses</div>
+                    <div class="stat-value">84</div>
+                    <div class="stat-change">▲ +8 new accounts</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">System Health Status</div>
+                    <div class="stat-value">99.98%</div>
+                    <div class="stat-change" style="color: #58a6ff;">All systems optimal</div>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <div class="table-title">Recent Accounts Intercepted</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Company Name</th>
+                            <th>Plan Level</th>
+                            <th>Usage Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Acme Corporation</td>
+                            <td>Enterprise Tier</td>
+                            <td><span class="status-badge">Protected</span></td>
+                        </tr>
+                        <tr>
+                            <td>Stark Industries</td>
+                            <td>Growth Scale</td>
+                            <td><span class="status-badge">Protected</span></td>
+                        </tr>
+                        <tr>
+                            <td>Wayne Enterprises</td>
+                            <td>Enterprise Tier</td>
+                            <td><span class="status-badge">Protected</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
 </body>
-</html><!-- TOXSTOP LIVE PROTECTION LOGS -->
-<div class="mt-8 bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden">
+</html><div class="mt-8 bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden">
     <div class="px-6 py-4 border-b border-gray-700 bg-gray-900">
         <h3 class="text-lg font-semibold text-white">Live User Protection Logs</h3>
         <p class="text-xs text-gray-400">Real-time tracking of intercepted software hazards</p>
