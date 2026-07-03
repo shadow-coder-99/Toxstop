@@ -1,10 +1,9 @@
-HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toxstop Analytics</title>
+    <title>Toxstop - Threat Analytics Center</title>
     <style>
         * {
             box-sizing: border-box;
@@ -14,9 +13,14 @@ HTML
         body {
             background-color: #0d1117;
             color: #c9d1d9;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             display: flex;
+            flex-direction: column;
             min-height: 100vh;
+        }
+        .wrapper {
+            display: flex;
+            flex: 1;
         }
         /* Sidebar Styling */
         .sidebar {
@@ -56,7 +60,7 @@ HTML
             background-color: #21262d;
             color: #f0f6fc;
         }
-        /* Main Workspace Styling */
+        /* Main Analytics Content */
         .main-content {
             flex: 1;
             padding: 40px;
@@ -68,40 +72,172 @@ HTML
         .header-area h1 {
             font-size: 1.6rem;
             color: #f0f6fc;
+            margin-bottom: 4px;
         }
-        .placeholder-box {
-            background-color: #161b22;
-            border: 1px dashed #30363d;
-            border-radius: 8px;
-            padding: 40px;
-            text-align: center;
+        .header-area p {
             color: #8b949e;
+            font-size: 0.9rem;
+        }
+        /* Grid Layout for Charts */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+        .chart-card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 24px;
+        }
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #f0f6fc;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chart-subtitle {
+            font-size: 0.8rem;
+            color: #8b949e;
+            background: #21262d;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        /* CSS Threat Bar Graph Representation */
+        .bar-graph {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            height: 160px;
+            padding-top: 10px;
+        }
+        .bar-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            gap: 8px;
+        }
+        .bar {
+            width: 60%;
+            background: linear-gradient(180deg, #58a6ff, #1f6feb);
+            border-radius: 4px 4px 0 0;
+            transition: height 0.5s ease;
+        }
+        .bar.high-threat {
+            background: linear-gradient(180deg, #ff7b72, #da3633);
+        }
+        .bar-label {
+            font-size: 0.75rem;
+            color: #8b949e;
+        }
+        /* Threat Vector Distribution List */
+        .vector-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .vector-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .vector-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+        .vector-name { color: #c9d1d9; }
+        .vector-count { color: #8b949e; font-family: monospace; }
+        .progress-track {
+            height: 8px;
+            background-color: #21262d;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: #3fb950;
+            border-radius: 4px;
+        }
+        @media (max-width: 992px) {
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 768px) {
+            .wrapper { flex-direction: column; }
+            .sidebar { width: 100%; padding: 16px; gap: 16px; }
+            .nav-links { flex-direction: row; overflow-x: auto; }
+            .main-content { padding: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- SIDEBAR -->
-    <div class="sidebar">
-        <div class="logo-area">
-            <span>🛡️</span> Toxstop
-        </div>
-        <ul class="nav-links">
-            <li><a href="index.html" class="nav-item">Dashboard</a></li>
-            <li><a href="#" class="nav-item">Customers</a></li>
-            <li><a href="analytics.html" class="nav-item active">Analytics</a></li>
-            <li><a href="settings.html" class="nav-item">Settings</a></li>
-        </ul>
-    </div>
-
-    <!-- MAIN ANALYTICS CONTENT -->
-    <div class="main-content">
-        <div class="header-area">
-            <h1>Threat Analytics Center</h1>
+    <div class="wrapper">
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <div class="logo-area">
+                <span>🛡️</span> Toxstop
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-item">Dashboard</a></li>
+                <li><a href="#" class="nav-item">Customers</a></li>
+                <li><a href="analytics.html" class="nav-item active">Analytics</a></li>
+                <li><a href="settings.html" class="nav-item">Settings</a></li>
+            </ul>
         </div>
 
-        <div class="placeholder-box">
-            <p>📊 Analytics charts and trend lines are being wired up next!</p>
+        <!-- MAIN ANALYTICS WORKSPACE -->
+        <div class="main-content">
+            <div class="header-area">
+                <h1>Threat Analytics Center</h1>
+                <p>Deep-dive telemetry data on software isolation loops and signature detection vectors.</p>
+            </div>
+
+            <div class="analytics-grid">
+                <!-- CHART 1: INTERCEPTIONS BY HOUR -->
+                <div class="chart-card">
+                    <div class="chart-title">
+                        Interceptions By Hour
+                        <span class="chart-subtitle">Live Feed</span>
+                    </div>
+                    <div class="bar-graph">
+                        <div class="bar-container"><div class="bar" style="height: 45px;"></div><span class="bar-label">08:00</span></div>
+                        <div class="bar-container"><div class="bar" style="height: 80px;"></div><span class="bar-label">10:00</span></div>
+                        <div class="bar-container"><div class="bar high-threat" style="height: 140px;"></div><span class="bar-label">12:00</span></div>
+                        <div class="bar-container"><div class="bar" style="height: 60px;"></div><span class="bar-label">14:00</span></div>
+                        <div class="bar-container"><div class="bar" style="height: 95px;"></div><span class="bar-label">16:00</span></div>
+                    </div>
+                </div>
+
+                <!-- CHART 2: HAZARD TYPE WEIGHTS -->
+                <div class="chart-card">
+                    <div class="chart-title">
+                        Hazard Distribution Density
+                        <span class="chart-subtitle">All Tiers</span>
+                    </div>
+                    <div class="vector-list">
+                        <div class="vector-item">
+                            <div class="vector-info"><span class="vector-name">Data Overreach Escalation</span><span class="vector-count">54.2%</span></div>
+                            <div class="progress-track"><div class="progress-fill" style="width: 54.2%; background-color: #ff7b72;"></div></div>
+                        </div>
+                        <div class="vector-item">
+                            <div class="vector-info"><span class="vector-name">Unfair Dark Patterns</span><span class="vector-count">29.1%</span></div>
+                            <div class="progress-track"><div class="progress-fill" style="width: 29.1%; background-color: #d4bbff;"></div></div>
+                        </div>
+                        <div class="vector-item">
+                            <div class="vector-info"><span class="vector-name">Addictive UX Loops</span><span class="vector-count">16.7%</span></div>
+                            <div class="progress-track"><div class="progress-fill" style="width: 16.7%; background-color: #79c0ff;"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
